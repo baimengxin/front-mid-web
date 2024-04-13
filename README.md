@@ -4,8 +4,6 @@
 
 技术栈为：vue3 + vue-router + pinia + tailwindcss
 
-
-
 # 项目结构
 
 ```shell
@@ -42,8 +40,6 @@
 ├── tailwind.config.js // wailwind css 配置文件，与 src 平级
 └── vite.config.js // vite 配置文件，与 src 平级
 ```
-
-
 
 # 项目创建
 
@@ -93,15 +89,11 @@ export default {
 import "./styles/index.scss";
 ```
 
-
-
 ## 3. sass
 
 ```shell
 pnpm install -D sass
 ```
-
-
 
 ## 4. vue-router
 
@@ -109,10 +101,14 @@ pnpm install -D sass
 pnpm install --save vue-router
 ```
 
-
-
 ## 5. pinia
 
 ```shell
 pnpm install --save pinia
+```
+
+## 6. vueuse
+
+```shell
+pnpm i @vueuse/core
 ```
