@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+import Navigation from './components/navigation/index.vue'
+</script>
 
 <template>
-  <div class="">mian的页面</div>
+  <div class="">
+    <Navigation />
+  </div>
 </template>
 
 <style lang="scss" scoped></style>
