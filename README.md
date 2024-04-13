@@ -112,3 +112,10 @@ pnpm install --save pinia
 ```shell
 pnpm i @vueuse/core
 ```
+
+
+## 7. axios
+
+```shell
+npm i --save axios
+```
