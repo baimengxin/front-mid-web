@@ -4,8 +4,6 @@
 
 技术栈为：vue3 + vue-router + pinia + tailwindcss
 
-
-
 # 项目创建
 
 ## 1. vite 创建项目
@@ -13,8 +11,6 @@
 ```shell
 pnpm create vite
 ```
-
-
 
 ## 2. tailwindcss
 
@@ -56,10 +52,20 @@ export default {
 import "./styles/index.scss";
 ```
 
-
-
 ## 3. sass
 
 ```shell
 pnpm install -D sass
+```
+
+## 4. vue-router
+
+```shell
+pnpm install --save vue-router
+```
+
+## 5. pinia
+
+```shell
+pnpm install --save pinia
 ```
