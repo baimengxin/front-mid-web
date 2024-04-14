@@ -12,7 +12,7 @@ defineProps({
 // 滑块样式
 const sliderStyle = ref({
   transform: 'translateX(0px)',
-  width: '60px'
+  width: '46px'
 })
 
 // item 元素的下标
@@ -77,6 +77,9 @@ const onItemClick = (index) => {
         v-for="(item, index) in data"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
+        :class="{
+          'text-zinc-100 ': currentItemIndex === index
+        }"
         :ref="setItemRef"
         @click="onItemClick(index)"
       >
