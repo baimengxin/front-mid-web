@@ -53,6 +53,9 @@ watch(currentItemIndex, (val) => {
 const onItemClick = (index) => {
   currentItemIndex.value = index
 }
+
+// 弹窗状态
+const isOpenPopup = ref(false)
 </script>
 
 <template>
@@ -70,6 +73,7 @@ const onItemClick = (index) => {
       <!-- 汉堡图标 -->
       <li
         class="z-20 fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white shadow-l-white"
+        @click="isOpenPopup = !isOpenPopup"
       >
         <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
       </li>
@@ -87,6 +91,10 @@ const onItemClick = (index) => {
       </li>
     </ul>
   </div>
+
+  <m-popup v-model="isOpenPopup">
+    <div>我是内容</div>
+  </m-popup>
 </template>
 
 <style lang="scss" scoped></style>
