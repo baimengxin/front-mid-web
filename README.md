@@ -65,12 +65,12 @@ npx tailwindcss init -p
 ```js
 export default {
   // Tailwind 应用范围
-  content: ["./index.html", "./src/**/*.{vue,js}"],
+  content: ['./index.html', './src/**/*.{vue,js}'],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
-};
+  plugins: []
+}
 ```
 
 3. 将加载 Tailwind 的指令添加到你的 CSS 文件中
@@ -86,7 +86,7 @@ export default {
    在 `mian.js` 中导入样式
 
 ```js
-import "./styles/index.scss";
+import './styles/index.scss'
 ```
 
 ## 3. sass
@@ -113,9 +113,17 @@ pnpm install --save pinia
 pnpm i @vueuse/core
 ```
 
-
 ## 7. axios
 
 ```shell
-npm i --save axios
+pnpm i --save axios
+```
+
+## 8. vite-plugin-svg-icons
+
+因为在 vite 中需要配置静态资源的处理
+`https://github.com/vbenjs/vite-plugin-svg-icons/blob/main/README.zh_CN.md`
+
+```shell
+pnpm install vite-plugin-svg-icons -D
 ```
