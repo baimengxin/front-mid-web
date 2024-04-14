@@ -3,6 +3,9 @@ import './styles/index.scss'
 
 import App from './App.vue'
 import router from '@/router'
+
+// 注册  vite-plugin-svg-icons
+import 'virtual:svg-icons-register'
 import { useREM } from '@/utils/flexible'
 
 // 通用组件
