@@ -1,6 +1,7 @@
 <script setup>
 import { onBeforeUpdate, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
+import MenuVue from '@/views/main/components/menu/index.vue'
 
 defineProps({
   data: {
@@ -52,6 +53,7 @@ watch(currentItemIndex, (val) => {
 // item 点击事件
 const onItemClick = (index) => {
   currentItemIndex.value = index
+  isOpenPopup.value = false
 }
 
 // 弹窗状态
@@ -93,7 +95,7 @@ const isOpenPopup = ref(false)
   </div>
 
   <m-popup v-model="isOpenPopup">
-    <div>我是内容</div>
+    <MenuVue :categorys="data" @onItemClick="onItemClick" />
   </m-popup>
 </template>
 
