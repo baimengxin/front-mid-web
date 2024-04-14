@@ -1,5 +1,5 @@
 <script setup>
-import { useScrollLock } from '@vueuse/core'
+import { useScrollLock, useVModel } from '@vueuse/core'
 import { watch } from 'vue'
 
 const props = defineProps({
@@ -11,10 +11,13 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue'])
 
+// 通过 useVModel 获取到响应式数据 isOpen，当 isOpen 改变时，会自动触发 update:modelValue
+const isOpen = useVModel(props)
+
 // 滚动锁定
 const isLocked = useScrollLock(document.body)
 watch(
-  () => props.modelValue,
+  isOpen,
   (val) => {
     isLocked.value = val
   },
@@ -30,15 +33,15 @@ watch(
       <!-- 蒙版 -->
       <Transition name="fade">
         <div
-          v-if="modelValue"
+          v-if="isOpen"
           class="w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"
-          @click="emits('update:modelValue', false)"
+          @click="isOpen = false"
         ></div>
       </Transition>
       <!-- 内容 -->
       <Transition name="popup-down-up">
         <div
-          v-if="modelValue"
+          v-if="isOpen"
           v-bind="$attrs"
           class="w-screen bg-white z-50 fixed bottom-0"
         >
