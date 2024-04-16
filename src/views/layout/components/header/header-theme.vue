@@ -25,7 +25,7 @@ const themeArr = [
 </script>
 
 <template>
-  <m-popover>
+  <m-popover placement="left-bottom">
     <template #reference>
       <m-svg-icon
         name="theme-light"
