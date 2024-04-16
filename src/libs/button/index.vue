@@ -93,7 +93,7 @@ const sizeKey = computed(() => {
 // 点击事件处理
 const onBtnClick = () => {
   if (props.loading) return
-  emits([EMIT_CLICK])
+  emits(EMIT_CLICK)
 }
 </script>
 
