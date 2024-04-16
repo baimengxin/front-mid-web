@@ -1,4 +1,6 @@
 <script>
+// 延迟关闭时长
+const DELAY_TIME = 100
 // 左上
 const PROP_LEFT_TOP = 'left-top'
 // 右上
@@ -42,18 +44,27 @@ const props = defineProps({
 
 // 弹出层状态
 const isVisable = ref(false)
+
+let timeout
 /**
  * 鼠标移入的触发行为
  */
 const onMouseenter = () => {
   isVisable.value = true
+  // 再次触发，清理定时器
+  if (timeout) {
+    clearTimeout(timeout)
+  }
 }
 
 /**
  * 鼠标移出的触发行为
  */
 const onMouseleave = () => {
-  isVisable.value = false
+  timeout = setTimeout(() => {
+    isVisable.value = false
+    timeout = null
+  }, DELAY_TIME)
 }
 
 /**
