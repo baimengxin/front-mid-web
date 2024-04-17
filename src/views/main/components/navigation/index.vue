@@ -2,22 +2,15 @@
 import MobileVue from './mobile/index.vue'
 import PcVue from './pc/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
-import { ref } from 'vue'
-import { getCategory } from '@/api/category'
-import { ALL_CATEGORY_ITEM } from '@/constants'
+import { useCategoryStore } from '@/store'
 
-const categoryData = ref([])
-const getCategoryData = async () => {
-  const { categorys } = await getCategory()
-  categoryData.value = categorys
-  categoryData.value.unshift(ALL_CATEGORY_ITEM)
-}
-getCategoryData()
+const store = useCategoryStore()
+store.loadCategoryFn()
 </script>
 
 <template>
   <div class="">
-    <MobileVue v-if="isMobileTerminal" :data="categoryData" />
+    <MobileVue v-if="isMobileTerminal" />
     <PcVue v-else />
   </div>
 </template>

@@ -2,13 +2,9 @@
 import { onBeforeUpdate, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
 import MenuVue from '@/views/main/components/menu/index.vue'
+import { useCategoryStore } from '@/store'
 
-defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
+const store = useCategoryStore()
 
 // 滑块样式
 const sliderStyle = ref({
@@ -80,7 +76,7 @@ const isOpenPopup = ref(false)
         <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
       </li>
       <li
-        v-for="(item, index) in data"
+        v-for="(item, index) in store.categoryData"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
         :class="{
@@ -95,7 +91,7 @@ const isOpenPopup = ref(false)
   </div>
 
   <m-popup v-model="isOpenPopup">
-    <MenuVue :categorys="data" @onItemClick="onItemClick" />
+    <MenuVue @onItemClick="onItemClick" />
   </m-popup>
 </template>
 

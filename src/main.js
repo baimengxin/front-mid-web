@@ -3,6 +3,7 @@ import './styles/index.scss'
 
 import App from './App.vue'
 import router from '@/router'
+import pinia from '@/store'
 
 // 注册  vite-plugin-svg-icons
 import 'virtual:svg-icons-register'
@@ -14,4 +15,4 @@ import mLibs from '@/libs'
 // 根据屏幕宽度初始化字体大小
 useREM()
 
-createApp(App).use(router).use(mLibs).mount('#app')
+createApp(App).use(router).use(pinia).use(mLibs).mount('#app')
