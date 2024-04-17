@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 export * from './modules/category'
+export * from './modules/theme'
 
 const pinia = createPinia()
 

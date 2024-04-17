@@ -57,7 +57,7 @@ const isOpenPopup = ref(false)
 </script>
 
 <template>
-  <div class="bg-white sticky top-0 left-0 z-10 dark:bg-zinc-900">
+  <div class="bg-white sticky top-0 left-0 z-10 dark:bg-zinc-900 duration-500">
     <ul
       class="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden"
       ref="ulRef"

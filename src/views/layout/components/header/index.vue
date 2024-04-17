@@ -12,7 +12,7 @@ const onToHome = () => {
 
 <template>
   <div
-    class="w-full bg-white border-b border-b-zinc-200 px-2 py-1 dark:bg-zinc-800 dark:border-b-zinc-700"
+    class="w-full bg-white border-b border-b-zinc-200 px-2 py-1 dark:bg-zinc-800 dark:border-b-zinc-700 duration-500"
   >
     <div class="flex items-center">
       <img

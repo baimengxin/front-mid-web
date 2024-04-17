@@ -8,6 +8,7 @@ import pinia from '@/store'
 // 注册  vite-plugin-svg-icons
 import 'virtual:svg-icons-register'
 import { useREM } from '@/utils/flexible'
+import useTheme from '@/utils/theme'
 
 // 通用组件
 import mLibs from '@/libs'
@@ -16,3 +17,6 @@ import mLibs from '@/libs'
 useREM()
 
 createApp(App).use(router).use(pinia).use(mLibs).mount('#app')
+
+// 初始化主题色 (需要保证 已经注册了 pinia)
+useTheme()
