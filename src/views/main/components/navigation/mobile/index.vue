@@ -57,7 +57,7 @@ const isOpenPopup = ref(false)
 </script>
 
 <template>
-  <div class="bg-white sticky top-0 left-0 z-10">
+  <div class="bg-white sticky top-0 left-0 z-10 dark:bg-zinc-900">
     <ul
       class="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden"
       ref="ulRef"
@@ -65,12 +65,12 @@ const isOpenPopup = ref(false)
       <!-- 滑块 -->
       <li
         ref="sliderTarget"
-        class="absolute h-[22px] bg-zinc-900 rounded-lg duration-200"
+        class="absolute h-[22px] bg-zinc-900 rounded-lg duration-200 dark:bg-zinc-800"
         :style="sliderStyle"
       ></li>
       <!-- 汉堡图标 -->
       <li
-        class="z-20 fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white shadow-l-white"
+        class="z-20 fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white shadow-l-white dark:bg-zinc-900 dark:shadow-l-zinc"
         @click="isOpenPopup = !isOpenPopup"
       >
         <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>

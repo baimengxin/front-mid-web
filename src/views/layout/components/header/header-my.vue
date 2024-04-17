@@ -26,7 +26,7 @@ const menuArr = [
   <m-popover>
     <template #reference>
       <div
-        class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100"
+        class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100 dark:hover:bg-zinc-900"
       >
         <!-- 头像 -->
         <img
@@ -38,7 +38,7 @@ const menuArr = [
         <m-svg-icon
           class="h-1.5 w-1.5 ml-0.5"
           name="down-arrow"
-          fillClass="fill-zinc-900 "
+          fillClass="fill-zinc-900 dark:fill-zinc-300"
         ></m-svg-icon>
 
         <!-- vip -->
@@ -52,16 +52,16 @@ const menuArr = [
     <!-- 气泡 -->
     <div class="w-[140px] overflow-hidden">
       <div
-        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60"
+        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800"
         v-for="item in menuArr"
         :key="item.id"
       >
         <m-svg-icon
           :name="item.icon"
           class="w-1.5 h-1.5 mr-1"
-          fillClass="fill-zinc-900 "
+          fillClass="fill-zinc-900 dark:fill-zinc-300"
         ></m-svg-icon>
-        <span class="text-zinc-800 text-sm">
+        <span class="text-zinc-800 text-sm dark:text-zinc-300">
           {{ item.title }}
         </span>
       </div>

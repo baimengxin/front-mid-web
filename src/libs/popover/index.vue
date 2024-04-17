@@ -145,7 +145,7 @@ watch(isVisable, (val) => {
       <div
         ref="contentTarget"
         v-show="isVisable"
-        class="absolute p-1 z-20 bg-white border rounded-md"
+        class="absolute p-1 z-20 bg-white border rounded-md dark:bg-zinc-900 dark:border-zinc-700"
         :style="contentStyle"
       >
         <!-- 匿名插槽 -->
