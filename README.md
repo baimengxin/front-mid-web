@@ -127,3 +127,11 @@ pnpm i --save axios
 ```shell
 pnpm install vite-plugin-svg-icons -D
 ```
+
+## 9. pinia-plugin-persistedstate 持久化处理
+
+安装
+
+```shell
+pnpm i pinia-plugin-persistedstate
+```
