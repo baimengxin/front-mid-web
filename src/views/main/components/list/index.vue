@@ -17,9 +17,16 @@ getPexelsData()
 </script>
 
 <template>
-  <div class="">
-    <ItemVue v-for="item in pexelsList" :key="item.id" :data="item" />
-  </div>
+  <m-waterfall
+    :data="pexelsList"
+    nodeKey="id"
+    :column="5"
+    :picturePreReading="true"
+  >
+    <template v-slot="{ item, width }">
+      <ItemVue :data="item" />
+    </template>
+  </m-waterfall>
 </template>
 
 <style lang="scss" scoped></style>
