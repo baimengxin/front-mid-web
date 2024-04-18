@@ -15,7 +15,8 @@ export default {
         xl: ['0.65rem', '0.75rem']
       },
       boxShadow: {
-        'l-white': '-10px 0 10px white'
+        'l-white': '-10px 0 10px white',
+        'l-zinc': '-10px 0 10px #18181b'
       },
       height: {
         header: '72px',
