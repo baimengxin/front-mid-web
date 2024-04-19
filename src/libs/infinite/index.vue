@@ -1,6 +1,6 @@
 <script setup>
 import { useVModel, useIntersectionObserver } from '@vueuse/core'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   // 是否处于加载状态
@@ -22,20 +22,39 @@ const loading = useVModel(props)
 
 // 滚动的元素
 const loadingTarget = ref(null)
+
+// 记录当前状态是否在底部
+const targetIsIntersecting = ref(false)
+
 useIntersectionObserver(
   loadingTarget,
   ([{ isIntersecting }], observerElement) => {
-    // 当加载更多的视图滚到底部时，加载更多数据
-    if (isIntersecting && !loading.value && !props.isFinished) {
-      console.log('onload', loading.value)
-      // 修改加载数据标记
-
-      loading.value = true
-      // 触发加载更多行为
-      emits('onLoad')
-    }
+    // 获取当前交叉状态
+    targetIsIntersecting.value = isIntersecting
+    // 触发 load
+    emitLoad()
   }
 )
+
+/**
+ * 触发 load
+ */
+const emitLoad = () => {
+  // 当加载更多的视图滚到底部时，加载更多数据
+  if (targetIsIntersecting.value && !loading.value && !props.isFinished) {
+    // 修改加载数据标记
+    loading.value = true
+    // 触发加载更多行为
+    emits('onLoad')
+  }
+}
+
+watch(loading, () => {
+  // 触发 load，延迟处理，等待 渲染和 useIntersectionObserver 的再次触发
+  setTimeout(() => {
+    emitLoad()
+  }, 100)
+})
 </script>
 
 <template>
