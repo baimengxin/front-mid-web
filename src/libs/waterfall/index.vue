@@ -125,7 +125,7 @@ const waitImgComplate = () => {
   const allImgs = getAllImg(imgElements)
   onComplateImgs(allImgs).then(() => {
     // 图片加载完成，获取高度
-    imgElements.forEach((el) => {
+    itemElements.forEach((el) => {
       itemHeights.push(el.offsetHeight)
     })
 
