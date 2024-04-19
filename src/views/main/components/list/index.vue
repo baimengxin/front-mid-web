@@ -6,7 +6,7 @@ import { isMobileTerminal } from '@/utils/flexible'
 
 let query = {
   page: 1,
-  size: 20
+  size: 100
 }
 
 // 数据是否在加载中
