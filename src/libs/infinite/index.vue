@@ -1,5 +1,5 @@
 <script setup>
-import { useVModel } from '@vueuse/core'
+import { useVModel, useIntersectionObserver } from '@vueuse/core'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -21,14 +21,15 @@ const emits = defineEmits(['onLoad', 'update:modelValue'])
 const loading = useVModel(props)
 
 // 滚动的元素
-const laodingTarget = ref(null)
+const loadingTarget = ref(null)
 useIntersectionObserver(
   loadingTarget,
   ([{ isIntersecting }], observerElement) => {
     // 当加载更多的视图滚到底部时，加载更多数据
     if (isIntersecting && !loading.value && !props.isFinished) {
-      console.log('onload')
+      console.log('onload', loading.value)
       // 修改加载数据标记
+
       loading.value = true
       // 触发加载更多行为
       emits('onLoad')
