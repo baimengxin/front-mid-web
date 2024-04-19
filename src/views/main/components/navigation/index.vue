@@ -9,10 +9,8 @@ store.loadCategoryFn()
 </script>
 
 <template>
-  <div class="">
-    <MobileVue v-if="isMobileTerminal" />
-    <PcVue v-else />
-  </div>
+  <MobileVue v-if="isMobileTerminal" />
+  <PcVue v-else />
 </template>
 
 <style lang="scss" scoped></style>
