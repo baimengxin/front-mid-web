@@ -31,6 +31,7 @@ const EMIT_CLICK = 'click'
 </script>
 <script setup>
 import { computed } from 'vue'
+import mSvgIcon from '../svg-icon/index.vue'
 
 const props = defineProps({
   // icon 图标名字

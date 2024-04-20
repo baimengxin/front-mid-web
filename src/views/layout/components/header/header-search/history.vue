@@ -4,6 +4,7 @@ const EMITS_ITEM_CLICK = 'itemClick'
 
 <script setup>
 import { useSearchStore } from '@/store'
+import { confirm } from '@/libs'
 
 const store = useSearchStore()
 
@@ -13,7 +14,14 @@ const emits = defineEmits([EMITS_ITEM_CLICK])
  * 删除所有记录
  */
 const onDeleteAllClick = () => {
-  store.deleteAllHistoryFn()
+  // 使用 confirm 函数
+  confirm('要删除所有的历史记录吗？')
+    .then(() => {
+      store.deleteAllHistoryFn()
+    })
+    .catch(() => {
+      console.log('取消按钮')
+    })
 }
 
 /**
