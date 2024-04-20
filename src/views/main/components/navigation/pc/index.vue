@@ -1,8 +1,9 @@
 <script setup>
-import { useCategoryStore } from '@/store'
+import { useCategoryStore, useAppStore } from '@/store'
 import { ref } from 'vue'
 
 const store = useCategoryStore()
+const appStore = useAppStore()
 
 /**
  * 状态切换处理
@@ -15,9 +16,10 @@ const triggerState = () => {
 /**
  * 选中状态处理
  */
-const currentCategoryIndex = ref(0)
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+
+const onItemClick = (item) => {
+  appStore.changeCurrentCategoryFn(item)
+  // currentCategoryIndex.value = index
 }
 </script>
 
@@ -46,9 +48,9 @@ const onItemClick = (index) => {
         :key="item.id"
         :class="{
           'text-zinc-900 bg-zinc-200 dark:text-zinc-300  dark:bg-zinc-900 ':
-            currentCategoryIndex === index
+            appStore.currentCategoryIndex === index
         }"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>

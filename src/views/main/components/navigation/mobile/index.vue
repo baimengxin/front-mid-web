@@ -1,19 +1,17 @@
 <script setup>
-import { onBeforeUpdate, ref, watch } from 'vue'
+import { nextTick, onBeforeUpdate, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
 import MenuVue from '@/views/main/components/menu/index.vue'
-import { useCategoryStore } from '@/store'
+import { useCategoryStore, useAppStore } from '@/store'
 
 const store = useCategoryStore()
+const appStore = useAppStore()
 
 // 滑块样式
 const sliderStyle = ref({
   transform: 'translateX(0px)',
   width: '46px'
 })
-
-// item 元素的下标
-const currentItemIndex = ref(0)
 
 // 存储所有的 item
 let elItem = []
@@ -34,21 +32,24 @@ onBeforeUpdate(() => {
 const ulRef = ref(null)
 const { x: ulScrollLeft } = useScroll(ulRef)
 
-watch(currentItemIndex, (val) => {
-  // 获取选中元素的 left、width
-  const { left, width } = elItem[val].getBoundingClientRect()
+watch(
+  () => appStore.currentCategoryIndex,
+  (val) => {
+    // 获取选中元素的 left、width
+    const { left, width } = elItem[val].getBoundingClientRect()
 
-  // 为 sliderStyle 设置属性
-  sliderStyle.value = {
-    // ul 横向滚动位置 + 当前元素的 left 偏移量
-    transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
-    width: width + 'px'
+    // 为 sliderStyle 设置属性
+    sliderStyle.value = {
+      // ul 横向滚动位置 + 当前元素的 left 偏移量
+      transform: `translateX(${ulScrollLeft.value + left - 10 + 'px'})`,
+      width: width + 'px'
+    }
   }
-})
+)
 
 // item 点击事件
-const onItemClick = (index) => {
-  currentItemIndex.value = index
+const onItemClick = (item) => {
+  appStore.changeCurrentCategoryFn(item)
   isOpenPopup.value = false
 }
 
@@ -80,10 +81,10 @@ const isOpenPopup = ref(false)
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
         :class="{
-          'text-zinc-100 ': currentItemIndex === index
+          'text-zinc-100 ': appStore.currentCategoryIndex === index
         }"
         :ref="setItemRef"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>

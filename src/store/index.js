@@ -4,6 +4,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 export * from './modules/category'
 export * from './modules/theme'
+export * from './modules/app'
 
 const pinia = createPinia()
 
