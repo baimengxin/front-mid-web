@@ -1,18 +1,25 @@
 <script setup>
 import { ref } from 'vue'
 import HintVue from './hint.vue'
+import HistoryVue from './history.vue'
+import { useSearchStore } from '@/store'
+
+const store = useSearchStore()
 
 const inputValue = ref('')
 
 // 搜索的回调事件
 const onSearchHandler = (val) => {
   inputValue.value = val
+  if (val) {
+    store.addHistoryFn(val)
+  }
 }
 </script>
 
 <template>
   <div class="w-full">
-    <m-search v-model="inputValue">
+    <m-search v-model="inputValue" @search="onSearchHandler">
       <template #dropdown>
         <div>
           <!-- 搜索提示 -->
@@ -21,6 +28,9 @@ const onSearchHandler = (val) => {
             :searchText="inputValue"
             @itemClick="onSearchHandler"
           />
+
+          <!-- 最近搜索 -->
+          <HistoryVue v-show="!inputValue" @itemClick="onSearchHandler" />
         </div>
       </template>
     </m-search>
