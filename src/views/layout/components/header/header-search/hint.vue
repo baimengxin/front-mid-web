@@ -4,7 +4,8 @@ const EMITS_ITEM_CLICK = 'itemClick'
 
 <script setup>
 import { getHint } from '@/api/pexels'
-import { ref, watch } from 'vue'
+import { watchDebounced } from '@vueuse/core'
+import { ref } from 'vue'
 
 const props = defineProps({
   searchText: {
@@ -26,8 +27,10 @@ const getHintData = async () => {
 }
 
 // 监听 搜索文本的变化，并获取对应的数据
-watch(() => props.searchText, getHintData, {
-  immediate: true
+watchDebounced(() => props.searchText, getHintData, {
+  immediate: true,
+  // 每次事件触发时，延迟的时间
+  debounce: 500
 })
 
 // item 点击事件
