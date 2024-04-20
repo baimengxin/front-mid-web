@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import HintVue from './hint.vue'
 import HistoryVue from './history.vue'
+import ThemeVue from './theme.vue'
 import { useSearchStore } from '@/store'
 
 const store = useSearchStore()
@@ -31,6 +32,9 @@ const onSearchHandler = (val) => {
 
           <!-- 最近搜索 -->
           <HistoryVue v-show="!inputValue" @itemClick="onSearchHandler" />
+
+          <!-- 主题推荐 -->
+          <ThemeVue v-show="!inputValue" />
         </div>
       </template>
     </m-search>
