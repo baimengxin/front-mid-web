@@ -1,0 +1,52 @@
+<script>
+const EMITS_ITEM_CLICK = 'itemClick'
+</script>
+
+<script setup>
+import { getHint } from '@/api/pexels'
+import { ref, watch } from 'vue'
+
+const props = defineProps({
+  searchText: {
+    type: String,
+    required: true
+  }
+})
+
+const emits = defineEmits([EMITS_ITEM_CLICK])
+
+// 搜索数据
+const hintData = ref([])
+// 请求搜索接口
+const getHintData = async () => {
+  if (!props.searchText) return
+
+  const { result } = await getHint(props.searchText)
+  hintData.value = result
+}
+
+// 监听 搜索文本的变化，并获取对应的数据
+watch(() => props.searchText, getHintData, {
+  immediate: true
+})
+
+// item 点击事件
+const onItemClick = (item) => {
+  emits(EMITS_ITEM_CLICK, item)
+}
+</script>
+
+<template>
+  <div class="">
+    <div
+      class="py-1 pl-1 text-base font-bold text-zinc-500 rounded cursor-pointer duration-300 hover:bg-zinc-200 dark:hover:bg-zinc-900"
+      v-for="(item, index) in hintData"
+      :key="index"
+      @click="onItemClick(item)"
+    >
+      {{ item }}
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped></style>
