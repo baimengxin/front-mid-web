@@ -3,9 +3,10 @@ import { ref } from 'vue'
 import HintVue from './hint.vue'
 import HistoryVue from './history.vue'
 import ThemeVue from './theme.vue'
-import { useSearchStore } from '@/store'
+import { useSearchStore, useAppStore } from '@/store'
 
 const store = useSearchStore()
+const appStore = useAppStore()
 
 const inputValue = ref('')
 
@@ -13,7 +14,10 @@ const inputValue = ref('')
 const onSearchHandler = (val) => {
   inputValue.value = val
   if (val) {
+    // 新增历史数据
     store.addHistoryFn(val)
+    // 触发 搜索文本的变化
+    appStore.changeSearchTextFn(val)
   }
 }
 </script>
