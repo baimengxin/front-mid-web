@@ -7,6 +7,7 @@ import { defineAsyncComponent } from 'vue'
 
 // 导出 confirm 函数
 export { confirm } from './confirm'
+export { message } from './message'
 
 export default {
   install(app) {

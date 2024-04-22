@@ -8,6 +8,7 @@ const typeEnum = [success, warn, error]
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import mSvgIcon from '../svg-icon/index.vue'
 
 const props = defineProps({
   // 消息类型
