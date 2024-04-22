@@ -2,6 +2,8 @@
 import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
 import { message } from '@/libs'
+import { ref } from 'vue'
+import { useFullscreen } from '@vueuse/core'
 
 const props = defineProps({
   data: {
@@ -24,6 +26,12 @@ const onDownload = () => {
     saveAs(props.data.photoDownLink)
   }, 100)
 }
+
+const imgTarget = ref(null)
+/**
+ * 全屏点击事件
+ * */
+const { enter: onImgFullScreen } = useFullscreen(imgTarget)
 </script>
 
 <template>
@@ -36,6 +44,7 @@ const onDownload = () => {
     >
       <!-- 图片 -->
       <img
+        ref="imgTarget"
         v-lazy
         class="w-full rounded bg-transparent"
         :src="data.photo"
@@ -73,6 +82,7 @@ const onDownload = () => {
           size="small"
           icon="full"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
+          @click="onImgFullScreen"
         />
       </div>
     </div>
