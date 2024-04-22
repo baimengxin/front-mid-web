@@ -169,3 +169,9 @@ pnpm add -D tailwind-scrollbar
 | scrollbar-thumb-\*  | 设置滚动条拇指的颜色 |
 | scrollbar-track-\*  | 设置滚动条轨道的颜色 |
 | scrollbar-corner-\* | 设置滚动条角的颜色   |
+
+## 12. driver 引导功能
+
+```shell
+ pnpm install --save driver.js
+```
