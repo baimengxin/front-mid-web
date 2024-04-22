@@ -17,13 +17,13 @@ const onToHome = () => {
     <div class="flex items-center">
       <img
         v-lazy
-        class="h-4 cursor-pointer mr-2"
+        class="guide-home h-4 cursor-pointer mr-2"
         src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"
         @click="onToHome"
       />
-      <headerSearchVue class="mr-1" />
-      <headerThemeVue class="mr-1" />
-      <headerMyVue />
+      <headerSearchVue class="mr-1 guide-search" />
+      <headerThemeVue class="mr-1 guide-theme" />
+      <headerMyVue class="guide-my" />
     </div>
   </div>
 </template>
