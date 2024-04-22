@@ -3,11 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
 // @layer @apply 指令来扩展 (解决类名太长，且重复太多)
 // @layer 就是在某一层样式做修改和扩充，里面可以用 @apply 应用其他样式
 @layer components{
     .floating {
         @apply w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 hover:shadow-lg
+    }
+
+    .scroll-class {
+        @apply  scrollbar-thin scrollbar-thumb-transparent xl:scrollbar-thumb-zinc-200 xl:dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent 
     }
 }

@@ -144,6 +144,28 @@ pnpm i --save file-saver
 
 ## 11. tailwind-scrollbar
 
+是 Tailwind CSS 的一个插件，它为支持跨浏览器的滚动条添加了样式实用程序
+
+### 安装
+
 ```shell
 pnpm add -D tailwind-scrollbar
 ```
+
+### 用法
+
+基础用法
+
+| 类名           | 用途                                   |
+| -------------- | -------------------------------------- |
+| scrollbar      | 启用自定义滚动条样式，使用默认宽度元格 |
+| scrollbar-thin | 启用自定义滚动条样式，使用细宽度       |
+| scrollbar-none | 完全隐藏滚动条                         |
+
+设置颜色
+
+| 类名                | 用途                 |
+| ------------------- | -------------------- |
+| scrollbar-thumb-\*  | 设置滚动条拇指的颜色 |
+| scrollbar-track-\*  | 设置滚动条轨道的颜色 |
+| scrollbar-corner-\* | 设置滚动条角的颜色   |
