@@ -135,3 +135,9 @@ pnpm install vite-plugin-svg-icons -D
 ```shell
 pnpm i pinia-plugin-persistedstate
 ```
+
+## 10. file-saver 小文件下载
+
+```shell
+pnpm i --save file-saver
+```

@@ -11,6 +11,9 @@ dependencies:
   axios:
     specifier: ^1.6.8
     version: 1.6.8
+  file-saver:
+    specifier: ^2.0.5
+    version: 2.0.5
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(vue@3.4.21)
@@ -1392,6 +1395,10 @@ packages:
     dependencies:
       reusify: 1.0.4
     dev: true
+
+  /file-saver@2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
+    dev: false
 
   /fill-range@4.0.0:
     resolution: {integrity: sha512-VcpLTWqWDiTerugjj8e3+esbg+skS3M9e54UuR3iCeIDMXCLTsAH8hTSzDQU/X6/6t3eYkOKoZSef2PlU6U1XQ==}
