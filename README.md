@@ -141,3 +141,9 @@ pnpm i pinia-plugin-persistedstate
 ```shell
 pnpm i --save file-saver
 ```
+
+## 11. tailwind-scrollbar
+
+```shell
+pnpm add -D tailwind-scrollbar
+```
