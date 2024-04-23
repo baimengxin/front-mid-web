@@ -83,6 +83,14 @@ watch(
     })
   }
 )
+
+/**
+ * 进入 pins
+ */
+const onToPins = (item) => {
+  console.log(item)
+  history.pushState(null, null, `/pins/${item.id}`)
+}
 </script>
 
 <template>
@@ -99,7 +107,7 @@ watch(
       :picturePreReading="false"
     >
       <template v-slot="{ item, width }">
-        <ItemVue :data="item" :width="width" />
+        <ItemVue :data="item" :width="width" @onDetails="onToPins" />
       </template>
     </m-waterfall>
   </m-infinite>

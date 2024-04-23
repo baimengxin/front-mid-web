@@ -15,6 +15,8 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits(['onDetails'])
+
 /**
  * 下载点击事件
  * */
@@ -27,11 +29,21 @@ const onDownload = () => {
   }, 100)
 }
 
+// img 的实例
 const imgTarget = ref(null)
 /**
  * 全屏点击事件
  * */
 const { enter: onImgFullScreen } = useFullscreen(imgTarget)
+
+/**
+ * 进入详情点击事件
+ */
+const onToPinsClick = () => {
+  emits('onDetails', {
+    id: props.data.id
+  })
+}
 </script>
 
 <template>
@@ -41,6 +53,7 @@ const { enter: onImgFullScreen } = useFullscreen(imgTarget)
       :style="{
         backgroundColor: randomRGB()
       }"
+      @click="onToPinsClick"
     >
       <!-- 图片 -->
       <img
