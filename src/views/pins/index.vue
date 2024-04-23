@@ -1,15 +1,10 @@
 <script setup>
-defineProps({
-  id: {
-    type: String,
-    required: true
-  }
-})
+import PinsVue from './components/pins.vue'
 </script>
 
 <template>
-  <div class="fixed left-0 top-0 z-20 w-screen h-screen bg-slate-500 text-xl">
-    <m-navbar>测试</m-navbar>
+  <div class="w-full h-full bg-zinc-200 dark:bg-zinc-800">
+    <PinsVue :id="$route.params.id" />
   </div>
 </template>
 
