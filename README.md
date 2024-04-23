@@ -173,5 +173,11 @@ pnpm add -D tailwind-scrollbar
 ## 12. driver 引导功能
 
 ```shell
- pnpm install --save driver.js
+pnpm install --save driver.js
+```
+
+## 13. gsap 动画
+
+```shell
+pnpm i -D gsap
 ```
