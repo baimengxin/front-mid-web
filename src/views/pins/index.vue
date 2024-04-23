@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div class="fixed left-0 top-0 z-20 w-screen h-screen bg-slate-500 text-xl">
-    {{ id }}
+    <m-navbar>测试</m-navbar>
   </div>
 </template>
 
