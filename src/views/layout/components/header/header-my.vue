@@ -1,4 +1,8 @@
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 // 构建 menu 数据源
 const menuArr = [
   {
@@ -20,12 +24,20 @@ const menuArr = [
     path: ''
   }
 ]
+
+/**
+ * 登录账户
+ * */
+const onToLogin = () => {
+  router.push('/login')
+}
 </script>
 
 <template>
   <m-popover>
     <template #reference>
       <div
+        v-if="false"
         class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100 dark:hover:bg-zinc-900"
       >
         <!-- 头像 -->
@@ -48,10 +60,14 @@ const menuArr = [
           name="vip"
         ></m-svg-icon>
       </div>
+
+      <div v-else>
+        <m-button icon="profile" iconColor="#fff" @click="onToLogin"></m-button>
+      </div>
     </template>
 
     <!-- 气泡 -->
-    <div class="w-[140px] overflow-hidden">
+    <div v-if="false" class="w-[140px] overflow-hidden">
       <div
         class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800"
         v-for="item in menuArr"
