@@ -181,3 +181,9 @@ pnpm install --save driver.js
 ```shell
 pnpm i -D gsap
 ```
+
+## 14. vee-validate 表单校验
+
+```shell
+pnpm i --save  vee-validate
+```
