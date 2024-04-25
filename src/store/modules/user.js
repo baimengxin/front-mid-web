@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { loginUser, getProfile } from '@/api/sys'
+import { loginUser, getProfile, registerUser } from '@/api/sys'
 import md5 from 'md5'
 import { message } from '@/libs'
 
@@ -11,6 +11,15 @@ export const useUserStore = defineStore(
     const token = ref('')
     // 用户信息
     const userInfo = ref({})
+
+    // 注册用户
+    const registerFn = async (regForm) => {
+      const { password } = regForm
+      return await registerUser({
+        ...regForm,
+        password: password ? md5(password) : ''
+      })
+    }
 
     // 用户登录请求
     const loginFn = async (loginForm) => {
@@ -48,7 +57,7 @@ export const useUserStore = defineStore(
       location.reload()
     }
 
-    return { token, userInfo, loginFn, logoutFn }
+    return { token, userInfo, loginFn, logoutFn, registerFn }
   },
   {
     // 3. 开启默认持久化配置

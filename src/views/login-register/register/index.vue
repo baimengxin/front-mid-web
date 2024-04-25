@@ -12,8 +12,12 @@ import {
   validateConfirmPassword
 } from '../validate'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { LOGIN_TYPE_USERNAME } from '@/constants'
+import { useUserStore } from '@/store'
 
 const router = useRouter()
+const store = useUserStore()
 
 /**
  * 插入规则
@@ -31,6 +35,27 @@ const loading = ref(false)
 // 去登录
 const onToLogin = () => {
   router.push('/login')
+}
+
+// 注册
+const onRegister = async () => {
+  loading.valut = true
+  try {
+    const payload = {
+      username: regForm.value.username,
+      password: regForm.value.password
+    }
+    // 触发注册
+    await store.registerFn(payload)
+    // 注册成功，触发登录
+    await store.loginFn({
+      ...payload,
+      loginType: LOGIN_TYPE_USERNAME
+    })
+  } finally {
+    loading.value = false
+  }
+  router.push('/')
 }
 </script>
 
@@ -50,7 +75,7 @@ const onToLogin = () => {
         注册账号
       </h3>
       <!-- 表单 -->
-      <VeeForm>
+      <VeeForm @submit="onRegister">
         <!-- 用户名 -->
         <VeeField
           class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
