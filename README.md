@@ -187,3 +187,9 @@ pnpm i -D gsap
 ```shell
 pnpm i --save  vee-validate
 ```
+
+## 15. md5 加密
+
+```shell
+pnpm i md5
+```
