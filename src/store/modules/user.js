@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { loginUser } from '@/api/sys'
+import { loginUser, getProfile } from '@/api/sys'
 import md5 from 'md5'
+import { message } from '@/libs'
 
 export const useUserStore = defineStore(
   'user',
@@ -18,11 +19,27 @@ export const useUserStore = defineStore(
         ...loginForm,
         password: password ? md5(password) : ''
       })
-      console.log(res)
       token.value = res.token
+      profileFn()
     }
 
-    return { token, loginFn }
+    // 获取用户信息
+    const profileFn = async () => {
+      const data = await getProfile()
+      console.log(data)
+      userInfo.value = data
+      message(
+        'success',
+        `欢迎您 ${
+          data.vipLevel
+            ? '尊贵的 VIP' + data.vipLevel + ' 用户 ' + data.nickname
+            : data.nickname
+        } `,
+        6000
+      )
+    }
+
+    return { token, userInfo, loginFn }
   },
   {
     // 3. 开启默认持久化配置
