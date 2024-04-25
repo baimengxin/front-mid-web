@@ -17,14 +17,31 @@ service.interceptors.request.use((config) => {
 })
 
 // 响应拦截器
-service.interceptors.response.use((response) => {
-  const { success, message, data } = response.data
+service.interceptors.response.use(
+  (response) => {
+    const { success, message, data } = response.data
 
-  if (success) {
-    return data
-  } else {
-    return Promise.reject(new Error(message))
+    if (success) {
+      return data
+    } else {
+      return Promise.reject(new Error(message))
+    }
+  },
+  (error) => {
+    const store = useUserStore()
+    // 处理 token 超时
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      // token 超时，退出登录
+      store.logoutFn()
+    }
+
+    // 提示错误信息
+    return Promise.reject(error)
   }
-})
+)
 
 export default service
