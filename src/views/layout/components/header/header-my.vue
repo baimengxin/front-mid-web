@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
+import { confirm } from '@/libs'
 
 const router = useRouter()
 const store = useUserStore()
@@ -32,6 +33,17 @@ const menuArr = [
  * */
 const onToLogin = () => {
   router.push('/login')
+}
+
+/**
+ * 退出登录
+ * */
+const onItemClick = (item) => {
+  if (item.id === 2) {
+    confirm('你确定要退出登录吗？').then(() => {
+      store.logoutFn()
+    })
+  }
 }
 </script>
 
@@ -71,6 +83,7 @@ const onToLogin = () => {
         class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800"
         v-for="item in menuArr"
         :key="item.id"
+        @click="onItemClick(item)"
       >
         <m-svg-icon
           :name="item.icon"

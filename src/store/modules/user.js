@@ -39,7 +39,16 @@ export const useUserStore = defineStore(
       )
     }
 
-    return { token, userInfo, loginFn }
+    // 退出登录
+    const logoutFn = () => {
+      token.value = ''
+      userInfo.value = {}
+
+      // 退出登录之后，重新刷新下页面，因为对于前台项目而言，用户是否登录（是否为 VIP）看到的数据可能不同
+      location.reload()
+    }
+
+    return { token, userInfo, loginFn, logoutFn }
   },
   {
     // 3. 开启默认持久化配置
