@@ -6,6 +6,7 @@ export * from './modules/category'
 export * from './modules/theme'
 export * from './modules/app'
 export * from './modules/search'
+export * from './modules/user'
 
 const pinia = createPinia()
 
