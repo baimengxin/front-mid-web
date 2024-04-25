@@ -6,12 +6,25 @@ import {
   ErrorMessage as VeeErrorMessage
 } from 'vee-validate'
 import { validateUsername, validatePassword } from '../validate'
+import SliderCaptchaVue from './slider-captcha.vue'
+import { ref } from 'vue'
+
+const isSliderCaptchaVisible = ref(false)
 
 /**
  * 登录，通过校验后触发
  */
 const onLoginHandler = () => {
-  console.log('触发登录')
+  isSliderCaptchaVisible.value = true
+}
+
+/**
+ * 人类行为通过
+ * */
+const onCaptchaSuccess = () => {
+  isSliderCaptchaVisible.value = false
+  // 登录操作
+  console.log('登录操作')
 }
 </script>
 
@@ -80,6 +93,13 @@ const onLoginHandler = () => {
       </div>
     </div>
   </div>
+
+  <!-- 人类行为验证模块 -->
+  <SliderCaptchaVue
+    v-if="isSliderCaptchaVisible"
+    @close="isSliderCaptchaVisible = false"
+    @success="onCaptchaSuccess"
+  />
 </template>
 
 <style lang="scss" scoped></style>
