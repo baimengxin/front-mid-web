@@ -3,12 +3,14 @@ import { ref } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
-import { confirm } from '@/libs'
+import { confirm, message } from '@/libs'
+import { putProfile } from '@/api/sys'
 
 const router = useRouter()
 const store = useUserStore()
 
-const text = ref('')
+const user = ref(store.userInfo)
+const loading = ref(false)
 
 // 移动端后退处理
 const onNavbarLeftClick = () => {
@@ -20,6 +22,15 @@ const onLogoutClick = () => {
   confirm('确定要退出登录吗？').then(() => {
     store.logoutFn()
   })
+}
+
+// 修改个人信息
+const onChangeProfile = async () => {
+  loading.value = true
+  await putProfile(user.value)
+  message('success', '用户信息修改成功')
+  store.setUserFn(user.value)
+  loading.value = false
 }
 </script>
 
@@ -91,7 +102,7 @@ const onLogoutClick = () => {
             >用户名</span
           >
           <m-input
-            v-model="store.userInfo.nickname"
+            v-model="user.nickname"
             class="w-full"
             type="text"
             max="20"
@@ -103,11 +114,7 @@ const onLogoutClick = () => {
           <span class="w-8 block mb-1 font-bold dark:text-zinc-300 xl:mb-0"
             >职位</span
           >
-          <m-input
-            v-model="store.userInfo.title"
-            class="w-full"
-            type="text"
-          ></m-input>
+          <m-input v-model="user.title" class="w-full" type="text"></m-input>
         </div>
 
         <!-- 公司 -->
@@ -115,11 +122,7 @@ const onLogoutClick = () => {
           <span class="w-8 block mb-1 font-bold dark:text-zinc-300 xl:mb-0"
             >公司</span
           >
-          <m-input
-            v-model="store.userInfo.company"
-            class="w-full"
-            type="text"
-          ></m-input>
+          <m-input v-model="user.company" class="w-full" type="text"></m-input>
         </div>
 
         <!-- 个人主页 -->
@@ -127,11 +130,7 @@ const onLogoutClick = () => {
           <span class="w-8 block mb-1 font-bold dark:text-zinc-300 xl:mb-0"
             >个人主页</span
           >
-          <m-input
-            v-model="store.userInfo.homePage"
-            class="w-full"
-            type="text"
-          ></m-input>
+          <m-input v-model="user.homePage" class="w-full" type="text"></m-input>
         </div>
 
         <!-- 个人介绍 -->
@@ -140,7 +139,7 @@ const onLogoutClick = () => {
             >个人介绍</span
           >
           <m-input
-            v-model="store.userInfo.introduction"
+            v-model="user.introduction"
             class="w-full"
             type="textarea"
             max="50"
@@ -150,6 +149,8 @@ const onLogoutClick = () => {
         <!-- 保存修改 -->
         <m-button
           class="w-full mt-2 mb-4 dark:text-zinc-300 dark:bg-zinc-800 xl:w-[160px] xl:ml-[50%] xl:translate-x-[-50%]"
+          :loading="loading"
+          @click="onChangeProfile"
           >保存修改</m-button
         >
         <!-- 移动端退出登录 -->

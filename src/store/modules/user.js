@@ -12,6 +12,12 @@ export const useUserStore = defineStore(
     // 用户信息
     const userInfo = ref({})
 
+    // 修改用户信息
+    const setUserFn = (newVal) => {
+      console.log('触发了')
+      userInfo.value = newVal
+    }
+
     // 注册用户
     const registerFn = async (regForm) => {
       const { password } = regForm
@@ -35,8 +41,7 @@ export const useUserStore = defineStore(
     // 获取用户信息
     const profileFn = async () => {
       const data = await getProfile()
-      console.log(data)
-      userInfo.value = data
+      setUserFn(data)
       message(
         'success',
         `欢迎您 ${
@@ -51,13 +56,13 @@ export const useUserStore = defineStore(
     // 退出登录
     const logoutFn = () => {
       token.value = ''
-      userInfo.value = {}
+      setUserFn({})
 
       // 退出登录之后，重新刷新下页面，因为对于前台项目而言，用户是否登录（是否为 VIP）看到的数据可能不同
       location.reload()
     }
 
-    return { token, userInfo, loginFn, logoutFn, registerFn }
+    return { token, userInfo, setUserFn, loginFn, logoutFn, registerFn }
   },
   {
     // 3. 开启默认持久化配置
