@@ -142,7 +142,8 @@ const onLogoutClick = () => {
           <m-input
             v-model="store.userInfo.introduction"
             class="w-full"
-            type="text"
+            type="textarea"
+            max="50"
           ></m-input>
         </div>
 
