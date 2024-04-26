@@ -43,7 +43,9 @@ const onItemClick = (item) => {
     confirm('你确定要退出登录吗？').then(() => {
       store.logoutFn()
     })
+    return
   }
+  router.push(item.path)
 }
 </script>
 
