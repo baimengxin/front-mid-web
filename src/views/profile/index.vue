@@ -1,16 +1,49 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
 import { confirm, message } from '@/libs'
 import { putProfile } from '@/api/sys'
+import ChangeAvatarVue from './components/change-avatar.vue'
 
 const router = useRouter()
 const store = useUserStore()
 
 const user = ref(store.userInfo)
+// 按钮的 loading
 const loading = ref(false)
+
+// 选择头像
+const inputFileTarget = ref(null)
+const onAvatarClick = () => {
+  inputFileTarget.value.click()
+}
+
+// 控制 dialog 的状态
+const isDialogVisible = ref(false)
+// 选中的图片
+const currentBlob = ref('')
+
+// 选中文件的回调
+const onSelectImgHandler = () => {
+  // 获取选中的文件
+  const imgFile = inputFileTarget.value.files[0]
+  // 生成 blob 对象
+  const blob = URL.createObjectURL(imgFile)
+  currentBlob.value = blob
+  isDialogVisible.value = true
+}
+
+/**
+ * 监听 dialog 的关闭
+ * */
+watch(isDialogVisible, (val) => {
+  if (!val) {
+    // 当关闭时，重置头像
+    inputFileTarget.value.value = null
+  }
+})
 
 // 移动端后退处理
 const onNavbarLeftClick = () => {
@@ -60,7 +93,7 @@ const onChangeProfile = async () => {
           >
 
           <!-- 头像部分 -->
-          <div class="group relative w-[80px] h-[80px]">
+          <div class="group relative w-[80px] h-[80px]" @click="onAvatarClick">
             <img
               v-lazy
               class="w-full h-full rounded-[50%]"
@@ -164,6 +197,20 @@ const onChangeProfile = async () => {
       </div>
     </div>
   </div>
+
+  <!-- pc 端 -->
+  <m-dialog v-if="!isMobileTerminal" title="标题" v-model="isDialogVisible">
+    <ChangeAvatarVue :blob="currentBlob" @close="isDialogVisible = false" />
+  </m-dialog>
+
+  <!-- 移动端 -->
+  <m-popup
+    v-else
+    :class="{ 'h-screen': isDialogVisible }"
+    v-model="isDialogVisible"
+  >
+    <ChangeAvatarVue :blob="currentBlob" @close="isDialogVisible = false" />
+  </m-popup>
 </template>
 
 <style lang="scss" scoped></style>
