@@ -27,6 +27,9 @@ import { isMobileTerminal } from '@/utils/flexible'
 import 'cropperjs/dist/cropper.css'
 import Cropper from 'cropperjs'
 import { ref, onMounted } from 'vue'
+import { useUserStore } from '@/store'
+import { getOSSClient } from '@/utils/sts'
+import { message } from '@/libs'
 
 defineProps({
   blob: {
@@ -63,8 +66,31 @@ const onConfirmClick = () => {
   // 获取裁剪后的图片
   cropper.getCroppedCanvas().toBlob((blob) => {
     // 裁剪后的 blob 地址
-    console.log(URL.createObjectURL(blob))
+    putObjectToOSS(blob)
   })
+}
+
+// 进行 oss 上传
+let ossClient = null
+const store = useUserStore()
+
+const putObjectToOSS = async (file) => {
+  if (!ossClient) {
+    ossClient = await getOSSClient()
+  }
+
+  try {
+    // 因为当前凭证只具备 images 文件夹下的访问权限，所以图片需要上传到 images/xxx.xx
+    const fileTypeArr = file.type.split('/')
+    const fileName = `${store.userInfo.username}/${Date.now()}.${
+      fileTypeArr[fileTypeArr.length - 1]
+    }`
+
+    // 文件存放路径，文件
+    const res = await ossClient.put(`images/${fileName}`, file)
+  } catch (error) {
+    message('error', error)
+  }
 }
 </script>
 
