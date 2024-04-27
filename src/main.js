@@ -15,6 +15,8 @@ import mLibs from '@/libs'
 // 自定义指令
 import mDirectives from '@/directives'
 
+import './permission'
+
 // 根据屏幕宽度初始化字体大小
 useREM()
 
