@@ -30,6 +30,7 @@ import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/store'
 import { getOSSClient } from '@/utils/sts'
 import { message } from '@/libs'
+import { putProfile } from '@/api/sys'
 
 defineProps({
   blob: {
@@ -88,9 +89,30 @@ const putObjectToOSS = async (file) => {
 
     // 文件存放路径，文件
     const res = await ossClient.put(`images/${fileName}`, file)
+    // 通知服务器
+    onChangeProfile(res.url)
   } catch (error) {
     message('error', error)
   }
+}
+
+/**
+ * 上传新头像到服务器
+ */
+const onChangeProfile = async (avatar) => {
+  // 更新本地数据
+  store.setUserFn({
+    ...store.userInfo,
+    avatar
+  })
+  // 更新服务器数据
+  await putProfile(store.userInfo)
+  // 提示用户
+  message('success', '用户头像修改成功')
+  // 关闭loading
+  loading.value = false
+  // 关闭 dialog
+  close()
 }
 </script>
 

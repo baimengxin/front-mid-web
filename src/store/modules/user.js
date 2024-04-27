@@ -14,7 +14,6 @@ export const useUserStore = defineStore(
 
     // 修改用户信息
     const setUserFn = (newVal) => {
-      console.log('触发了')
       userInfo.value = newVal
     }
 
