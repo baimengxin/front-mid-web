@@ -199,3 +199,9 @@ pnpm i md5
 ```shell
 pnpm install cropperjs@1.5.12 --save
 ```
+
+## 17. ali-oss 阿里云 OSS
+
+```shell
+pnpm i --save ali-oss@6.17.0
+```
