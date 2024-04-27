@@ -193,3 +193,9 @@ pnpm i --save  vee-validate
 ```shell
 pnpm i md5
 ```
+
+## 16. cropperjs 图片裁剪
+
+```shell
+pnpm install cropperjs@1.5.12 --save
+```

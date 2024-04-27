@@ -11,6 +11,9 @@ dependencies:
   axios:
     specifier: ^1.6.8
     version: 1.6.8
+  cropperjs:
+    specifier: 1.5.12
+    version: 1.5.12
   driver.js:
     specifier: ^1.3.1
     version: 1.3.1
@@ -973,6 +976,10 @@ packages:
       object-assign: 4.1.1
       vary: 1.1.2
     dev: true
+
+  /cropperjs@1.5.12:
+    resolution: {integrity: sha512-re7UdjE5UnwdrovyhNzZ6gathI4Rs3KGCBSc8HCIjUo5hO42CtzyblmWLj6QWVw7huHyDMfpKxhiO2II77nhDw==}
+    dev: false
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
