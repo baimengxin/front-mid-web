@@ -40,6 +40,15 @@ const router = useRouter()
 // 跳转动画
 const transitionName = ref('')
 
+// 处理动画状态变化
+const isAnimation = ref(false)
+const beforeEnter = () => {
+  isAnimation.value = true
+}
+const afterLeave = () => {
+  isAnimation.value = false
+}
+
 // 监听路由变化
 router.beforeEach((to, from) => {
   // 定义当前动画名称
@@ -51,10 +60,17 @@ router.beforeEach((to, from) => {
   <!-- 路由出口 -->
   <RouterView v-slot="{ Component }">
     <!-- 动画组件 -->
-    <Transition :name="transitionName">
+    <Transition
+      :name="transitionName"
+      @before-enter="beforeEnter"
+      @after-leave="afterLeave"
+    >
       <!-- 缓存组件 -->
       <KeepAlive>
-        <component :is="Component" />
+        <component
+          :is="Component"
+          :class="{ 'fixed top-0 left-0 w-screen z-50': isAnimation }"
+        />
       </KeepAlive>
     </Transition>
   </RouterView>
