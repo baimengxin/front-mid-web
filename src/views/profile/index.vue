@@ -2,13 +2,14 @@
 import { ref, watch } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
 import { confirm, message } from '@/libs'
 import { putProfile } from '@/api/sys'
 import ChangeAvatarVue from './components/change-avatar.vue'
 
 const router = useRouter()
 const store = useUserStore()
+const appStore = useAppStore()
 
 const user = ref(store.userInfo)
 // 按钮的 loading
@@ -47,6 +48,7 @@ watch(isDialogVisible, (val) => {
 
 // 移动端后退处理
 const onNavbarLeftClick = () => {
+  appStore.changeRouterTypeFn('back')
   router.back()
 }
 
@@ -196,21 +198,21 @@ const onChangeProfile = async () => {
         </m-button>
       </div>
     </div>
+
+    <!-- pc 端 -->
+    <m-dialog v-if="!isMobileTerminal" title="标题" v-model="isDialogVisible">
+      <ChangeAvatarVue :blob="currentBlob" @close="isDialogVisible = false" />
+    </m-dialog>
+
+    <!-- 移动端 -->
+    <m-popup
+      v-else
+      :class="{ 'h-screen': isDialogVisible }"
+      v-model="isDialogVisible"
+    >
+      <ChangeAvatarVue :blob="currentBlob" @close="isDialogVisible = false" />
+    </m-popup>
   </div>
-
-  <!-- pc 端 -->
-  <m-dialog v-if="!isMobileTerminal" title="标题" v-model="isDialogVisible">
-    <ChangeAvatarVue :blob="currentBlob" @close="isDialogVisible = false" />
-  </m-dialog>
-
-  <!-- 移动端 -->
-  <m-popup
-    v-else
-    :class="{ 'h-screen': isDialogVisible }"
-    v-model="isDialogVisible"
-  >
-    <ChangeAvatarVue :blob="currentBlob" @close="isDialogVisible = false" />
-  </m-popup>
 </template>
 
 <style lang="scss" scoped></style>

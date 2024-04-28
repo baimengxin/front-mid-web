@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { getPexelsFromId } from '@/api/pexels'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router'
+import { useAppStore } from '@/store'
 
 const props = defineProps({
   id: {
@@ -11,6 +12,7 @@ const props = defineProps({
   }
 })
 
+const appStore = useAppStore()
 const pexelData = ref({})
 /**
  * 获取详情数据
@@ -26,6 +28,7 @@ getPexelData()
  */
 const router = useRouter()
 const onPop = () => {
+  appStore.changeRouterTypeFn('back')
   router.back()
 }
 </script>

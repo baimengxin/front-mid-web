@@ -2,13 +2,24 @@
 import Navigation from './components/navigation/index.vue'
 import ListVue from './components/list/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
+import { useRouter } from 'vue-router'
 
 const store = useUserStore()
+const router = useRouter()
+const appStore = useAppStore()
 
 const onVipClick = () => {}
 
-const onMyClick = () => {}
+const onMyClick = () => {
+  // 配置跳转方式
+  appStore.changeRouterTypeFn('push')
+  if (store.token) {
+    router.push('/profile')
+  } else {
+    router.push('/login')
+  }
+}
 </script>
 
 <template>

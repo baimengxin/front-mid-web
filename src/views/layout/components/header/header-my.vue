@@ -1,10 +1,11 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
 import { confirm } from '@/libs'
 
 const router = useRouter()
 const store = useUserStore()
+const appStore = useAppStore()
 
 // 构建 menu 数据源
 const menuArr = [
@@ -32,6 +33,7 @@ const menuArr = [
  * 登录账户
  * */
 const onToLogin = () => {
+  appStore.changeRouterTypeFn('push')
   router.push('/login')
 }
 
@@ -45,6 +47,7 @@ const onItemClick = (item) => {
     })
     return
   }
+  appStore.changeRouterTypeFn('push')
   router.push(item.path)
 }
 </script>

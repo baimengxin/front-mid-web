@@ -8,12 +8,13 @@ import {
 import { validateUsername, validatePassword } from '../validate'
 import SliderCaptchaVue from './slider-captcha.vue'
 import { ref } from 'vue'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
 import { useRouter } from 'vue-router'
 
 const store = useUserStore()
 const router = useRouter()
+const appStore = useAppStore()
 
 // 登录验证 拼图状态
 const isSliderCaptchaVisible = ref(false)
@@ -60,6 +61,7 @@ const onLogin = async () => {
 
 // 去注册
 const onToRegister = () => {
+  appStore.changeRouterTypeFn('push')
   router.push('/register')
 }
 </script>

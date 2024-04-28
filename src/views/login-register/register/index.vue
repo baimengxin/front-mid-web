@@ -14,10 +14,11 @@ import {
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
 
 const router = useRouter()
 const store = useUserStore()
+const appStore = useAppStore()
 
 /**
  * 插入规则
@@ -34,6 +35,7 @@ const loading = ref(false)
 
 // 去登录
 const onToLogin = () => {
+  appStore.changeRouterTypeFn('push')
   router.push('/login')
 }
 
