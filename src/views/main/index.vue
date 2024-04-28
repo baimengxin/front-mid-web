@@ -21,8 +21,13 @@ onActivated(() => {
   containerTarget.value.scrollTop = containerTargetScrollY.value
 })
 
-const onVipClick = () => {}
+// vip跳转
+const onVipClick = () => {
+  appStore.changeRouterTypeFn('push')
+  router.push('/member')
+}
 
+// 我的跳转
 const onMyClick = () => {
   // 配置跳转方式
   appStore.changeRouterTypeFn('push')
