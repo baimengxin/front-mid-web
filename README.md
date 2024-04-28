@@ -205,3 +205,9 @@ pnpm install cropperjs@1.5.12 --save
 ```shell
 pnpm i --save ali-oss@6.17.0
 ```
+
+## 18. dayjs
+
+```shell
+pnpm i --save dayjs
+```
