@@ -4,10 +4,22 @@ import ListVue from './components/list/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useUserStore, useAppStore } from '@/store'
 import { useRouter } from 'vue-router'
+import { useScroll } from '@vueuse/core'
+import { onActivated, ref } from 'vue'
 
 const store = useUserStore()
 const router = useRouter()
 const appStore = useAppStore()
+
+// 记录页面滚动的位置
+const containerTarget = ref(null)
+const { y: containerTargetScrollY } = useScroll(containerTarget)
+// 被缓存的组件再次可见，会回调 onActivated 方法
+onActivated(() => {
+  if (!containerTarget.value) return
+
+  containerTarget.value.scrollTop = containerTargetScrollY.value
+})
 
 const onVipClick = () => {}
 
@@ -25,6 +37,7 @@ const onMyClick = () => {
 <template>
   <div
     class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500 scroll-class"
+    ref="containerTarget"
   >
     <Navigation />
     <div class="max-w-screen-xl mx-auto relative m-1 xl:mt-4">

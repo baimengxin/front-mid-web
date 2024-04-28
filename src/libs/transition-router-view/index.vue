@@ -93,6 +93,7 @@ const clearTask = () => {
         <component
           :is="Component"
           :class="{ 'fixed top-0 left-0 w-screen z-50': isAnimation }"
+          :key="$route.fullPath"
         />
       </KeepAlive>
     </Transition>

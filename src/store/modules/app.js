@@ -21,7 +21,7 @@ export const useAppStore = defineStore('app', () => {
     if (!isMobileTerminal.value) {
       return (routerType.value = 'none')
     }
-    console.log('执行了', routerType.value)
+
     return routerType.value
   })
 
