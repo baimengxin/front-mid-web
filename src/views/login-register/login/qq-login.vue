@@ -6,8 +6,10 @@ const QQ_LOGIN_URL =
 
 <script setup>
 import { onMounted } from 'vue'
-import { isMobileTerminal } from '@/utils/flexible'
+// import { isMobileTerminal } from '@/utils/flexible'
 import brodacast from './utils/brodacast'
+import { oauthLogin } from './utils/oauth'
+import { LOGIN_TYPE_QQ } from '@/constants'
 
 // qq 登录挂起
 onMounted(() => {
@@ -68,8 +70,9 @@ const openQQWindow = () => {
   brodacast.wait().then(async (oauthObj) => {
     // 登录成功,关闭通知
     brodacast.clear()
-    // TODO：执行登录操作
-    console.log('TODO：执行登录操作')
+
+    // 执行登录操作
+    oauthLogin(LOGIN_TYPE_QQ, oauthObj)
     console.log(oauthObj)
   })
 }

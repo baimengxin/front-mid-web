@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { loginUser, getProfile, registerUser } from '@/api/sys'
 import md5 from 'md5'
 import { message } from '@/libs'
+import { LOGIN_TYPE_OAUTH_NO_REGISTER_CODE } from '@/constants'
 
 export const useUserStore = defineStore(
   'user',
@@ -33,6 +34,12 @@ export const useUserStore = defineStore(
         ...loginForm,
         password: password ? md5(password) : ''
       })
+
+      // QQ 扫码登录，用户未注册
+      if (res.code === LOGIN_TYPE_OAUTH_NO_REGISTER_CODE) {
+        return res.code
+      }
+
       token.value = res.token
       profileFn()
     }
