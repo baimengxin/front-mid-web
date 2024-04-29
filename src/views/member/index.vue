@@ -5,6 +5,7 @@ import PayMenuItemVue from './components/pay-menu-item.vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/store'
+import PayMentVue from './components/payment/index.vue'
 
 const router = useRouter()
 const store = useAppStore()
@@ -66,7 +67,7 @@ const onChangeCurrentPay = (item) => {
         </div>
         <p class="mt-1 text-sm text-zinc-500">{{ currentPayData.desc }}</p>
         <!-- 支付 -->
-        <m-count-down :time="1000 * 60"></m-count-down>
+        <PayMentVue class="mt-4" />
       </div>
     </div>
   </div>
